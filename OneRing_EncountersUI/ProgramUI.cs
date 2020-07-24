@@ -119,6 +119,8 @@ namespace OneRing_EncountersUI
         private void DisplayCulture(Culture culture)
         {
             Console.Clear();
+
+            Character newCharacter = new Character();
             CultureWeaponSet rawWepSet = _charRepo.GetWeaponSetByName(culture);
 
             string wepSetOne = CultureWeaponSetLister(rawWepSet.WeaponSetOne);
@@ -154,6 +156,28 @@ namespace OneRing_EncountersUI
                     Console.ReadLine();
                     break;
                 case "2":
+                    newCharacter.LivingStandard = culture.LivingStandard;
+                    newCharacter.CulturalBlessing = culture.CulturalBlessing;
+                    newCharacter.AweCommonSkill = culture.AweCommonSkill;
+                    newCharacter.AthleticsCommonSkill = culture.AthleticsCommonSkill;
+                    newCharacter.AwarenessCommonSkill = culture.AwarenessCommonSkill;
+                    newCharacter.ExploreCommonSkill = culture.ExploreCommonSkill;
+                    newCharacter.SongCommonSkill = culture.SongCommonSkill;
+                    newCharacter.CraftCommonSkill = culture.CraftCommonSkill;
+                    newCharacter.InspireCommonSkill = culture.InspireCommonSkill;
+                    newCharacter.TravelCommonSkill = culture.TravelCommonSkill;
+                    newCharacter.InsightCommonSkill = culture.InsightCommonSkill;
+                    newCharacter.HealingCommonSkill = culture.HealingCommonSkill;
+                    newCharacter.CourtesyCommonSkill = culture.CourtesyCommonSkill;
+                    newCharacter.BattleCommonSkill = culture.BattleCommonSkill;
+                    newCharacter.PersuadeCommonSkill = culture.PersuadeCommonSkill;
+                    newCharacter.StealthCommonSkill = culture.StealthCommonSkill;
+                    newCharacter.SearchCommonSkill = culture.SearchCommonSkill;
+                    newCharacter.HuntingCommonSkill = culture.HuntingCommonSkill;
+                    newCharacter.RiddleCommonSkill = culture.LoreCommonSkill;
+                    newCharacter.DistinctiveFeatures = culture.DistinctiveFeatures;
+
+                    Console.Clear();
                     break;
                 case "back":
                     break;
