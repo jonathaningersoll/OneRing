@@ -118,7 +118,7 @@ namespace OneRing_EncountersUI
 
         private void DisplayCulture(Culture culture)
         {
-
+            Console.Clear();
             CultureWeaponSet rawWepSet = _charRepo.GetWeaponSetByName(culture);
 
             string wepSetOne = CultureWeaponSetLister(rawWepSet.WeaponSetOne);
@@ -155,7 +155,7 @@ namespace OneRing_EncountersUI
                     break;
                 case "2":
                     break;
-                case "3":
+                case "back":
                     break;
             }
         }
