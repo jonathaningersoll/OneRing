@@ -178,6 +178,30 @@ namespace OneRing_EncountersUI
                     newCharacter.DistinctiveFeatures = culture.DistinctiveFeatures;
 
                     Console.Clear();
+                    Console.WriteLine("Which background would you like to select?");
+
+                    //count the number of backgrounds in the list
+                    int bgCount = _charRepo.GetBackground().Count();
+
+                    //capture user input and change to integer
+                    ListBackgrounds(name);
+                    string ansBackground = Console.ReadLine();
+                    int ansBg = int.Parse(ansBackground);
+
+                    //while the user input is less than or equal to the amount of backgrounds,
+                    if (ansBg <= bgCount)
+                    {
+                        //retrieve an index, and query the user to know:
+                            //which two traits they would like and...
+                            //which weapon set they would like
+
+                            //assign wepSetOne or wepSetTwo to the newCharacter
+                            //assign background.favoredSkill to the newCharacter
+                    }
+                    // Instead of a swtich statement, just capture this as the index to select the index of the background
+
+
+
                     break;
                 case "back":
                     break;
@@ -195,6 +219,7 @@ namespace OneRing_EncountersUI
             return string.Join(", ", weapon);
         }
 
+        // Backgrounds
         private void DisplayBackgrounds(string name)
         {
             List<Background> backgrounds = _charRepo.GetBackgroundsByName(name);
@@ -211,6 +236,20 @@ namespace OneRing_EncountersUI
             }
             Console.WriteLine("Press any key to return to Culture...");
             Console.ReadKey();
+        }
+
+        private void ListBackgrounds(string name)
+        {
+            //Create new list
+            List<Background> backgrounds = _charRepo.GetBackgroundsByName(name);
+            int index = 1;
+            foreach(Background background in backgrounds)
+            {
+                Console.WriteLine($"{index}. {background.Tiitle}");
+            }
+            //GetBackgroundsByName(); and foreach background, just print out
+            //index number
+            //background name
         }
 
         // Seed Weapon Sets:

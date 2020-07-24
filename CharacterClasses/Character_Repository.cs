@@ -52,6 +52,7 @@ namespace CharacterClasses
             return _bgCurrent;
         }
 
+
         public bool CreateBackground(Background background)
         {
             int backStart = _background.Count;
