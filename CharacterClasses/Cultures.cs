@@ -8,6 +8,7 @@ namespace CharacterClasses
 {
     public class Characteristics
     {
+        public Background Background { get; set; }
         public string LivingStandard { get; set; }
         public string UnusualCalling { get; set; }
         public string CulturalBlessing { get; set; }
@@ -58,7 +59,7 @@ namespace CharacterClasses
     public class Background
     {
         public string Culture { get; set; }
-        public string Tiitle { get; set; }
+        public string Title { get; set; }
         public int BasicBody { get; set; }
         public int BasicHeart { get; set; }
         public int BasicWits { get; set; }

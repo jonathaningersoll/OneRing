@@ -1,6 +1,7 @@
 ﻿using CharacterClasses;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -33,10 +34,7 @@ namespace OneRing_EncountersUI
             {
                 case "1":
                     // Create A Character
-                    Console.Clear();
                     CreateCharacter();
-
-                    Character newCharacter = new Character();
                     break;
                 case "2":
                     // Display Created Characters
@@ -55,56 +53,109 @@ namespace OneRing_EncountersUI
             bool createChar = true;
             while (createChar)
             {
-                Console.WriteLine("Please select a culture to view their stats:\n");
-                ListCultures();
-                Console.WriteLine("7. Exit to previous menu");
+                BuildCulture();
+                //Configure culture
+                    //Choose culture
+                    //Configure weapon skills
+                    //Configure specialties
+                    //Configure background
+                    //Build the Culture
 
-                //Capture selection
-                List<Culture> cultures = _charRepo.GetCultures();
-                string ansCulture = Console.ReadLine();
-                switch (ansCulture)
-                {
-                    //View culture options
-                    case "1":
-                        Console.Clear();
-                        DisplayCulture(cultures[0]);
-                        break;
-                    case "2":
-                        Console.Clear();
-                        DisplayCulture(cultures[1]);
-                        break;
-                    case "3":
-                        Console.Clear();
-                        DisplayCulture(cultures[2]);
-                        break;
-                    case "4":
-                        Console.Clear();
-                        DisplayCulture(cultures[3]);
-                        break;
-                    case "5":
-                        Console.Clear();
-                        DisplayCulture(cultures[4]);
-                        break;
-                    case "6":
-                        Console.Clear();
-                        DisplayCulture(cultures[5]);
-                        break;
-                    case "7":
-                        Console.WriteLine("Press any key to go back to previous menu...");
-                        createChar = false;
-                        break;
-                    default:
-                        break;
-                        // Choose character's culture
-                        // Choose culture weapon skillset
-                        // View background details
-                        // Choose culture background
-                        // Choose background attributes, favored skill, and two distinctive features
-                        //Assign everything
-                }
+                //Configure calling
+                    //Favor two skills
+                    //Add an additional Trait
+                    //Configure Shadow Weakness
+
+                //Configure Favored Attributes
+                    //Add 3 points to an Attribute
+                    //Add 2 points to an Attribute
+                    //Add 2 point to an Attribute
+
+                //Raise skill levels (Common and Weapon skills)
+
+                //Calculate Endurance and Hope (from Culture) (culture.Endurance + character.Heart)
+                
+                //Calculate Starting Gear
+                    //Add weapon
+                    //Add armor
+                    //Add shield
+                    //Damage rating = basic body
+                    //Parry = basic wits
+
+                //Configure Wisdom and Valor
+
+                
             }
         }
 
+        private void BuildCulture()
+        {
+            Culture newCulture = new Culture();
+
+            //Choose culture:
+
+
+            //View culture details
+            Console.Clear();
+            Console.WriteLine("Please select a culture to view their details:\n");
+           
+            //List cultures
+            ListCultures();
+
+            //Capture selection
+            List<Culture> cultures = _charRepo.GetCultures();
+            string ansCulture = Console.ReadLine();
+            switch (ansCulture)
+            {
+                //View culture options
+                case "1":
+                    Console.Clear();
+                    DisplayCulture(cultures[0]);
+                    break;
+                case "2":
+                    Console.Clear();
+                    DisplayCulture(cultures[1]);
+                    break;
+                case "3":
+                    Console.Clear();
+                    DisplayCulture(cultures[2]);
+                    break;
+                case "4":
+                    Console.Clear();
+                    DisplayCulture(cultures[3]);
+                    break;
+                case "5":
+                    Console.Clear();
+                    DisplayCulture(cultures[4]);
+                    break;
+                case "6":
+                    Console.Clear();
+                    DisplayCulture(cultures[5]);
+                    break;
+                case "7":
+
+                    break;
+                case "8":
+                    Console.WriteLine("Press any key to go back to previous menu...");
+                    break;
+                default:
+                    break;
+            }
+            //while loop?
+            //Select culture to use
+            //or go back to list of cultures
+            //If culture selected, assign values to newCulture
+
+            //Configure weapon skills
+            SelectWeaponSet();
+            //Configure specialties
+            //SelectSpecialties();
+            //Configure background
+            //SelectBackground();
+            //Build the Culture
+        }
+
+        
         private void ListCultures()
         {
             List<Culture> cultures = _charRepo.GetCultures();
@@ -122,7 +173,7 @@ namespace OneRing_EncountersUI
 
             Character newCharacter = new Character();
             CultureWeaponSet rawWepSet = _charRepo.GetWeaponSetByName(culture);
-
+            
             string wepSetOne = CultureWeaponSetLister(rawWepSet.WeaponSetOne);
             string wepSetTwo = CultureWeaponSetLister(rawWepSet.WeaponSetTwo);
             string name = culture.Name.Remove(2).ToLower();
@@ -142,49 +193,17 @@ namespace OneRing_EncountersUI
                                        "\n>Weapon Skill options:\n" +
                                        $"1) {wepSetOne}\n" +
                                        $"2) {wepSetTwo}\n" +
-                                       "\n" +
-                                       "Please select an option:\n" +
-                                       "1. View Backgrounds\n" +
-                                       $"2. Select the {culture.Name} culture for your character\n" +
-                                       "3. Back to Culture menu\n");
-            string ansCult = Console.ReadLine();
-            switch (ansCult)
-            {
-                case "1":
-                    Console.Clear();
-                    DisplayBackgrounds(name);
-                    Console.ReadLine();
-                    break;
-                case "2":
-                    newCharacter.LivingStandard = culture.LivingStandard;
-                    newCharacter.CulturalBlessing = culture.CulturalBlessing;
-                    newCharacter.AweCommonSkill = culture.AweCommonSkill;
-                    newCharacter.AthleticsCommonSkill = culture.AthleticsCommonSkill;
-                    newCharacter.AwarenessCommonSkill = culture.AwarenessCommonSkill;
-                    newCharacter.ExploreCommonSkill = culture.ExploreCommonSkill;
-                    newCharacter.SongCommonSkill = culture.SongCommonSkill;
-                    newCharacter.CraftCommonSkill = culture.CraftCommonSkill;
-                    newCharacter.InspireCommonSkill = culture.InspireCommonSkill;
-                    newCharacter.TravelCommonSkill = culture.TravelCommonSkill;
-                    newCharacter.InsightCommonSkill = culture.InsightCommonSkill;
-                    newCharacter.HealingCommonSkill = culture.HealingCommonSkill;
-                    newCharacter.CourtesyCommonSkill = culture.CourtesyCommonSkill;
-                    newCharacter.BattleCommonSkill = culture.BattleCommonSkill;
-                    newCharacter.PersuadeCommonSkill = culture.PersuadeCommonSkill;
-                    newCharacter.StealthCommonSkill = culture.StealthCommonSkill;
-                    newCharacter.SearchCommonSkill = culture.SearchCommonSkill;
-                    newCharacter.HuntingCommonSkill = culture.HuntingCommonSkill;
-                    newCharacter.RiddleCommonSkill = culture.LoreCommonSkill;
-                    newCharacter.DistinctiveFeatures = culture.DistinctiveFeatures;
-
-                    Console.Clear();
-                    break;
-                case "back":
-                    break;
+                                       $"\n" +
+                                       $">Backgrounds:\n");
+            DisplayBackgrounds(name);
+            Console.WriteLine("\n");
             }
-        }
 
         // Weapon Set methods:
+        private void SelectWeaponSet()
+        {
+
+        }
         private string CultureWeaponSetLister(Dictionary<string, int> wepSet)
         {
             List<string> weapon = new List<string>();
@@ -195,6 +214,7 @@ namespace OneRing_EncountersUI
             return string.Join(", ", weapon);
         }
 
+        // Backgrounds
         private void DisplayBackgrounds(string name)
         {
             List<Background> backgrounds = _charRepo.GetBackgroundsByName(name);
@@ -203,15 +223,34 @@ namespace OneRing_EncountersUI
             {
                 string df = _charRepo.StringList(background.DistinctiveFeatures);
                 Console.WriteLine("---------------------------------------\n" +
-                    $"{index}. {background.Tiitle}\n" +
+                    $"{index}. {background.Title}\n" +
                     $" - Basic Attributes: Body: {background.BasicBody}, Heart: {background.BasicHeart}, Wits: {background.BasicWits}\n" +
                     $" - Favored Skill: {background.FavoredSkill}\n" +
                     $" - Distinctive Features (Choose Two): {df}");
                 index++;
             }
-            Console.WriteLine("Press any key to return to Culture...");
+            Console.WriteLine("Press any key to return to previous menu...");
             Console.ReadKey();
         }
+
+        //List current culture's backgrounds
+        private void ListBackgrounds(string name)
+        {
+            //Create new list of current culture's backgrounds
+            List<Background> backgrounds = _charRepo.GetBackgroundsByName(name);
+            //Begin index
+            int index = 1;
+            //Begin iterating over list of current culture's backgrounds
+            foreach(Background background in backgrounds)
+            {
+                //print out the index number and background title
+                Console.WriteLine($"{index}. {background.Title}");
+                //increment the index
+                index++;
+            }
+        }
+
+
 
         // Seed Weapon Sets:
         private void SeedWeaponSets()
@@ -259,7 +298,7 @@ namespace OneRing_EncountersUI
             Background bardOne = new Background()
             {
                 Culture = "Barding",
-                Tiitle = "By Hammer and Anvil",
+                Title = "By Hammer and Anvil",
                 BasicBody = 5,
                 BasicHeart = 7,
                 BasicWits = 2,
@@ -281,7 +320,7 @@ namespace OneRing_EncountersUI
             Background bardTwo = new Background()
             {
                 Culture = "Barding",
-                Tiitle = "Wordweaver",
+                Title = "Wordweaver",
                 BasicBody = 4,
                 BasicHeart = 6,
                 BasicWits = 4,
@@ -303,7 +342,7 @@ namespace OneRing_EncountersUI
             Background bardThree = new Background()
             {
                 Culture = "Barding",
-                Tiitle = "Gifted Senses",
+                Title = "Gifted Senses",
                 BasicBody = 6,
                 BasicHeart = 6,
                 BasicWits = 2,
@@ -325,7 +364,7 @@ namespace OneRing_EncountersUI
             Background dwarfOne = new Background()
             {
                 Culture = "Dwarf",
-                Tiitle = "A Life of Toil",
+                Title = "A Life of Toil",
                 BasicBody = 6,
                 BasicHeart = 2,
                 BasicWits = 6,
