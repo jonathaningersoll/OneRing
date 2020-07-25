@@ -6,6 +6,7 @@ using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace OneRing_EncountersUI
@@ -92,15 +93,22 @@ namespace OneRing_EncountersUI
         {
             Culture newCulture = new Culture();
 
-            //Choose culture:
+            //Prompt: Please enter a number to select a culture or option:
+            Console.WriteLine("Please enter a number to select a culture or option:");
+            
+            //acquire culture list
+            List<string> cultureList = ListCultureNames();
 
+            //List the indexed cultures
+            ListCultures(ListCultureNames());
 
-            //View culture details
-            Console.Clear();
+            //Prompt: View culture details
+            Console.WriteLine("View each culture's details");
+
+            //Submenu for details listing cultures and then calling DisplayCulture()...
+
+            //Prompt: Exit to main menu
             Console.WriteLine("Please select a culture to view their details:\n");
-           
-            //List cultures
-            ListCultures();
 
             //Capture selection
             List<Culture> cultures = _charRepo.GetCultures();
@@ -111,6 +119,8 @@ namespace OneRing_EncountersUI
                 case "1":
                     Console.Clear();
                     DisplayCulture(cultures[0]);
+                    Console.WriteLine("asdl;fkja;sdlfkj;aldsfj");
+                    Console.ReadLine();
                     break;
                 case "2":
                     Console.Clear();
@@ -133,14 +143,14 @@ namespace OneRing_EncountersUI
                     DisplayCulture(cultures[5]);
                     break;
                 case "7":
-
-                    break;
-                case "8":
                     Console.WriteLine("Press any key to go back to previous menu...");
                     break;
                 default:
                     break;
             }
+
+            ListCultures();
+            Console.WriteLine("Select your culture");
             //while loop?
             //Select culture to use
             //or go back to list of cultures
@@ -155,14 +165,32 @@ namespace OneRing_EncountersUI
             //Build the Culture
         }
 
-        
-        private void ListCultures()
+        private List<string> ListCultureNames()
         {
+            //Get list of cultures
             List<Culture> cultures = _charRepo.GetCultures();
-            int index = 1;
+            //Create a string list of the culture names
+            List<string> cultureNames = new List<string>();
+            //For each name ofa culture in the cultures listed,
             foreach (Culture culture in cultures)
             {
-                Console.WriteLine($"{index}. {culture.Name}");
+                //Add the string name to the string list "cultureNames"
+                cultureNames.Add(culture.Name);
+            }
+            //Spit it out.
+            return cultureNames;
+        }
+
+        private void ListCultures(List<string> cultureList)
+        {
+            //Start indexer at 1
+            int index = 1;
+            //For each culture name in the culturelist,
+            foreach (string cult in cultureList)
+            {
+                //Write the index as well as the name of the culture
+                Console.WriteLine($"{index}. {cult}");
+                //Add 1 to the index
                 index++;
             }
         }

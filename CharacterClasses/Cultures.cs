@@ -74,4 +74,22 @@ namespace CharacterClasses
         public Dictionary<string, int> WeaponSetTwo { get; set; }
     }
 
+    public class Coffee
+    {
+        public string Roast { get; set; }
+        public bool Cafeinated { get; set; }
+        public bool HasCream { get; set; }
+        public decimal SizeInOz { get; set; }
+        public decimal TempInC { get; set; }
+
+
+        public Coffee(string roast, bool cafeinated, bool hasCream, decimal sizeInOz, decimal tempInC)
+        {
+            Roast = roast;
+            Cafeinated = cafeinated;
+            HasCream = hasCream;
+            SizeInOz = sizeInOz;
+            TempInC = tempInC;
+        }
+    }
 }
