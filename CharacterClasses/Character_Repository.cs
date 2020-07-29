@@ -73,7 +73,7 @@ namespace CharacterClasses
 
         public CultureWeaponSet GetWeaponSetByName(Culture culture)
         {
-            string name = culture.Name.Remove(2);
+            string name = culture.CultureName.Remove(2);
             
             foreach (CultureWeaponSet ws in _wepSet)
             {

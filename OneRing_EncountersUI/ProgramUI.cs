@@ -34,135 +34,295 @@ namespace OneRing_EncountersUI
             switch (ans)
             {
                 case "1":
-                    // Create A Character
-                    CreateCharacter();
-                    break;
+                    {
+                        // Create A Character
+                        CreateCharacter();
+                        break;
+                    }
                 case "2":
-                    // Display Created Characters
-                    break;
+                    {
+                        // Display Created Characters
+                        break;
+                    }
                 default:
-                    Console.WriteLine("Please choose an appropriate option.");
-                    break;
+                    {
+                        Console.WriteLine("Please choose an appropriate option.");
+                        break;
+                    }
             }
         }
 
+        // Build the Character
         private void CreateCharacter()
         {
             Console.Clear();
-            Character newCharacter = new Character();
-
             bool createChar = true;
             while (createChar)
             {
-                BuildCulture();
-                //Configure culture
-                    //Choose culture
-                    //Configure weapon skills
-                    //Configure specialties
-                    //Configure background
-                    //Build the Culture
+                var newCharacter = new Character();
+                var newCulture = new Culture();
 
-                //Configure calling
-                    //Favor two skills
-                    //Add an additional Trait
-                    //Configure Shadow Weakness
+                //CultureMenu builds the new culture and spits out a culture ready for value assignment
+                newCulture = CultureMenu(newCulture);
+                newCharacter.Culture = newCulture;
+                Console.WriteLine(newCulture.CultureName); //can get rid of this.
+                Console.WriteLine(newCharacter.Culture.CultureName);
+                Console.ReadLine();
 
                 //Configure Favored Attributes
-                    //Add 3 points to an Attribute
-                    //Add 2 points to an Attribute
-                    //Add 2 point to an Attribute
+                //Add 3 points to an Attribute
+                //Add 2 points to an Attribute
+                //Add 2 point to an Attribute
 
                 //Raise skill levels (Common and Weapon skills)
 
                 //Calculate Endurance and Hope (from Culture) (culture.Endurance + character.Heart)
-                
+
                 //Calculate Starting Gear
-                    //Add weapon
-                    //Add armor
-                    //Add shield
-                    //Damage rating = basic body
-                    //Parry = basic wits
+                //Add weapon
+                //Add armor
+                //Add shield
+                //Damage rating = basic body
+                //Parry = basic wits
 
                 //Configure Wisdom and Valor
 
-                
+                //Final: Add newCharacter to list of characters.
+
             }
         }
 
-        private void BuildCulture()
+        //Build the Culture for the Character
+        private Culture CultureMenu(Culture newCulture)
         {
-            Culture newCulture = new Culture();
-
-            //Prompt: Please enter a number to select a culture or option:
-            Console.WriteLine("Please enter a number to select a culture or option:");
-            
-            //acquire culture list
-            List<string> cultureList = ListCultureNames();
-
-            //List the indexed cultures
-            ListCultures(ListCultureNames());
-
-            //Prompt: View culture details
-            Console.WriteLine("View each culture's details");
-
-            //Submenu for details listing cultures and then calling DisplayCulture()...
-
-            //Prompt: Exit to main menu
-            Console.WriteLine("Please select a culture to view their details:\n");
-
-            //Capture selection
-            List<Culture> cultures = _charRepo.GetCultures();
-            string ansCulture = Console.ReadLine();
-            switch (ansCulture)
+            bool cultDetailMenu = true;
+            while (cultDetailMenu)
             {
-                //View culture options
-                case "1":
+                Console.Clear();
+                Console.WriteLine("Would you like to view the details of each culture first [y/n]?");
+                string detailAns = Console.ReadLine().ToLower();
+
+                switch (detailAns)
+                {
+                    case "y":
+                        {
+                            ViewDetailMenu();
+                            break;
+                        }
+                    case "n":
+                        {
+                            break;
+                        }
+                    default:
+                        {
+                            Console.WriteLine("Please enter an appropriate value");
+                            break;
+                        }
+                }
+                //list all cultures
+
+                var culters = _charRepo.GetCultures().ToArray();
+
+                //Query for index culture.atindex(num);
+                Console.Clear();
+                Console.WriteLine("Please enter the number of the culture you would like to select:");
+                int cultIndex = 1;
+                foreach (Culture culture in culters)
+                {
+                    Console.WriteLine($"{cultIndex}. {culture.CultureName}");
+                    cultIndex++;
+                }
+                int selectedCulture = int.Parse(Console.ReadLine());
+                selectedCulture = selectedCulture - 1;
+                newCulture.AthleticsCommonSkill = culters[selectedCulture].AthleticsCommonSkill;
+                newCulture.AwarenessCommonSkill = culters[selectedCulture].AwarenessCommonSkill;
+                newCulture.AweCommonSkill = culters[selectedCulture].AweCommonSkill;
+                newCulture.BattleCommonSkill = culters[selectedCulture].BattleCommonSkill;
+                newCulture.CourtesyCommonSkill = culters[selectedCulture].CourtesyCommonSkill;
+                newCulture.CraftCommonSkill = culters[selectedCulture].CraftCommonSkill;
+                newCulture.CulturalBlessing = culters[selectedCulture].CulturalBlessing;
+                newCulture.CultureName = culters[selectedCulture].CultureName;
+                newCulture.ExploreCommonSkill = culters[selectedCulture].ExploreCommonSkill;
+                newCulture.HealingCommonSkill = culters[selectedCulture].HealingCommonSkill;
+                newCulture.HuntingCommonSkill = culters[selectedCulture].HuntingCommonSkill;
+                newCulture.InsightCommonSkill = culters[selectedCulture].InsightCommonSkill;
+                newCulture.InspireCommonSkill = culters[selectedCulture].InspireCommonSkill;
+                newCulture.LivingStandard = culters[selectedCulture].LivingStandard;
+                newCulture.LoreCommonSkill = culters[selectedCulture].LoreCommonSkill;
+                newCulture.PersuadeCommonSkill = culters[selectedCulture].PersuadeCommonSkill;
+                newCulture.RiddleCommonSkill = culters[selectedCulture].RiddleCommonSkill;
+                newCulture.SearchCommonSkill = culters[selectedCulture].SearchCommonSkill;
+                newCulture.SongCommonSkill = culters[selectedCulture].SongCommonSkill;
+                newCulture.StealthCommonSkill = culters[selectedCulture].StealthCommonSkill;
+                newCulture.TravelCommonSkill = culters[selectedCulture].TravelCommonSkill;
+
+                Console.WriteLine(newCulture.LivingStandard);
+                Console.ReadLine();
+            }
+            return newCulture;
+
+            Console.Clear();
+            CultureMenu();
+            var cultureList = _charRepo.GetCultures();
+            int index = 1;
+            Console.WriteLine("Please enter a number to select a culture or option:");
+            Seperator();
+            foreach (Culture culture in cultureList)
+            {
+                Console.WriteLine($"{index}. {culture.CultureName}");
+                index++;
+            }
+            Seperator();
+            int final = index++;
+            Console.WriteLine($"{final}. View each culture's details");
+
+            string ansCultString = Console.ReadLine();
+            int ansCult = Int32.Parse(ansCultString);
+            ansCult--;
+            if (ansCult >= cultureList.Count)
+            {
+                bool cultDetailsMenu = true;
+                while (cultDetailsMenu)
+                {
                     Console.Clear();
-                    DisplayCulture(cultures[0]);
-                    Console.WriteLine("asdl;fkja;sdlfkj;aldsfj");
-                    Console.ReadLine();
-                    break;
-                case "2":
-                    Console.Clear();
-                    DisplayCulture(cultures[1]);
-                    break;
-                case "3":
-                    Console.Clear();
-                    DisplayCulture(cultures[2]);
-                    break;
-                case "4":
-                    Console.Clear();
-                    DisplayCulture(cultures[3]);
-                    break;
-                case "5":
-                    Console.Clear();
-                    DisplayCulture(cultures[4]);
-                    break;
-                case "6":
-                    Console.Clear();
-                    DisplayCulture(cultures[5]);
-                    break;
-                case "7":
-                    Console.WriteLine("Press any key to go back to previous menu...");
-                    break;
-                default:
-                    break;
+                    var List = _charRepo.GetCultures();
+                    int ind = 1;
+                    Console.WriteLine("Please enter a number to select a culture or option:");
+                    Seperator();
+                    foreach (Culture culture in cultureList)
+                    {
+                        Console.WriteLine($"{index}. {culture.CultureName}");
+                        index++;
+                    }
+                    //DisplayCulture
+
+                    //switch case to turn cultDetailsMenu to false
+                }
+            }
+            else if (ansCult > cultureList.Count)
+            {
+                // Create new culture and assign values to it based on the index number
+                Culture tempCulture = cultureList.ElementAt(ansCult);
+                newCulture.CultureName = tempCulture.CultureName;
+                newCulture.LivingStandard = tempCulture.LivingStandard;
+                newCulture.CulturalBlessing = tempCulture.CulturalBlessing;
+
+                newCulture.AweCommonSkill = tempCulture.AweCommonSkill;
+                newCulture.AthleticsCommonSkill = tempCulture.AthleticsCommonSkill;
+                newCulture.AwarenessCommonSkill = tempCulture.AwarenessCommonSkill;
+                newCulture.ExploreCommonSkill = tempCulture.ExploreCommonSkill;
+                newCulture.SongCommonSkill = tempCulture.SongCommonSkill;
+                newCulture.CraftCommonSkill = tempCulture.CraftCommonSkill;
+                newCulture.InsightCommonSkill = tempCulture.InsightCommonSkill;
+                newCulture.TravelCommonSkill = tempCulture.TravelCommonSkill;
+                newCulture.HealingCommonSkill = tempCulture.HealingCommonSkill;
+                newCulture.CourtesyCommonSkill = tempCulture.BattleCommonSkill;
+                newCulture.BattleCommonSkill = tempCulture.BattleCommonSkill;
+                newCulture.PersuadeCommonSkill = tempCulture.PersuadeCommonSkill;
+                newCulture.SearchCommonSkill = tempCulture.SearchCommonSkill;
+                newCulture.RiddleCommonSkill = tempCulture.RiddleCommonSkill;
+                newCulture.LoreCommonSkill = tempCulture.LoreCommonSkill;
+            }
+            else
+            {
+                Console.WriteLine("Please choose an appropriate option");
             }
 
-            ListCultures();
-            Console.WriteLine("Select your culture");
-            //while loop?
-            //Select culture to use
-            //or go back to list of cultures
-            //If culture selected, assign values to newCulture
-
+            //Configure culture
+            //Choose culture
             //Configure weapon skills
-            SelectWeaponSet();
+            //ConfigureWeaponSkills();
             //Configure specialties
-            //SelectSpecialties();
+            //ConfigureSpecialties();
             //Configure background
-            //SelectBackground();
+            //ConfigureBackground();
             //Build the Culture
+
+
+            //Configure calling
+            //Favor two skills
+            //Add an additional Trait
+            //Configure Shadow Weakness
+
+            return newCulture;
+        }
+
+        private void ViewDetailMenu()
+        {
+            bool detailView = true;
+            while (detailView)
+            {
+                Console.Clear();
+                //list Cultures
+                //list details of selected culture
+                var culters = _charRepo.GetCultures().ToArray();
+
+                //Query for index culture.atindex(num);
+                Console.WriteLine("Please enter the number of the culture you would like to view:");
+                int cultIndex = 1;
+                foreach (Culture culture in culters)
+                {
+                    Console.WriteLine($"{cultIndex}. {culture.CultureName}");
+                    cultIndex++;
+                }
+
+                int ans = int.Parse(Console.ReadLine());
+                ans = ans - 1;
+                var selectedCulture = culters[ans];
+
+                //send culture to displayculture();
+
+                DisplayCultureDetails(selectedCulture);
+                Console.Clear();
+                Console.WriteLine("Would you like to view the details of another culture [y/n]?");
+                string anss = Console.ReadLine().ToLower();
+
+                switch (anss)
+                {
+                    case "y":
+                        {
+                            break;
+                        }
+                    case "n":
+                        {
+                            detailView = false;
+                            break;
+                        }
+                }
+            }
+        }
+
+        private int CultureMenu()
+        {
+            Console.Clear();
+            Console.WriteLine($"Enter a number to choose a culture for your character:\n");
+            int number;
+            //Get the cultures and store them in a list
+            var cultureList = _charRepo.GetCultures();
+            int index = 0;
+            //iterate over the list
+            foreach (Culture culture in cultureList)
+            {
+                Console.WriteLine($"{index}. {culture.CultureName}");
+                index++;
+            }
+            int final = cultureList.Count() + 1;
+            Console.WriteLine($"\n{final}. View culture details");
+            int cultAns = int.Parse(Console.ReadLine());
+
+            if (cultAns < final)
+            {
+                return cultAns;
+            }
+            else if (cultAns == final)
+            {
+                return cultAns;
+            }
+            else
+            {
+                return cultAns;
+            }
+
         }
 
         private List<string> ListCultureNames()
@@ -171,11 +331,11 @@ namespace OneRing_EncountersUI
             List<Culture> cultures = _charRepo.GetCultures();
             //Create a string list of the culture names
             List<string> cultureNames = new List<string>();
-            //For each name ofa culture in the cultures listed,
+            //For each name of a culture in the cultures listed,
             foreach (Culture culture in cultures)
             {
                 //Add the string name to the string list "cultureNames"
-                cultureNames.Add(culture.Name);
+                cultureNames.Add(culture.CultureName);
             }
             //Spit it out.
             return cultureNames;
@@ -195,17 +355,15 @@ namespace OneRing_EncountersUI
             }
         }
 
-        private void DisplayCulture(Culture culture)
+        private void DisplayCultureDetails(Culture culture)
         {
             Console.Clear();
-
-            Character newCharacter = new Character();
             CultureWeaponSet rawWepSet = _charRepo.GetWeaponSetByName(culture);
-            
+
             string wepSetOne = CultureWeaponSetLister(rawWepSet.WeaponSetOne);
             string wepSetTwo = CultureWeaponSetLister(rawWepSet.WeaponSetTwo);
-            string name = culture.Name.Remove(2).ToLower();
-            Console.WriteLine($"{culture.Name} selected.Please review the stats for the {culture.Name}:\n" +
+            string name = culture.CultureName.Remove(2).ToLower();
+            Console.WriteLine($"{culture.CultureName} selected.Please review the stats for the {culture.CultureName}:\n" +
                                    "\n" +
                                    "Common Skills:" +
                                        "--------------------------------------------\n" +
@@ -225,7 +383,7 @@ namespace OneRing_EncountersUI
                                        $">Backgrounds:\n");
             DisplayBackgrounds(name);
             Console.WriteLine("\n");
-            }
+        }
 
         // Weapon Set methods:
         private void SelectWeaponSet()
@@ -257,7 +415,7 @@ namespace OneRing_EncountersUI
                     $" - Distinctive Features (Choose Two): {df}");
                 index++;
             }
-            Console.WriteLine("Press any key to return to previous menu...");
+            Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
         }
 
@@ -269,13 +427,18 @@ namespace OneRing_EncountersUI
             //Begin index
             int index = 1;
             //Begin iterating over list of current culture's backgrounds
-            foreach(Background background in backgrounds)
+            foreach (Background background in backgrounds)
             {
                 //print out the index number and background title
                 Console.WriteLine($"{index}. {background.Title}");
                 //increment the index
                 index++;
             }
+        }
+
+        private void Seperator()
+        {
+            Console.WriteLine("------------------------------");
         }
 
 
@@ -418,7 +581,7 @@ namespace OneRing_EncountersUI
         {
             Culture barding = new Culture()
             {
-                Name = "Barding",
+                CultureName = "Barding",
                 Description = "Barding Description",
                 LivingStandard = "Prosperous",
                 UnusualCalling = "None",
@@ -449,7 +612,7 @@ namespace OneRing_EncountersUI
 
             Culture dwarfLonelyMountain = new Culture()
             {
-                Name = "Dwarf of the Lonely Mountain",
+                CultureName = "Dwarf of the Lonely Mountain",
                 Description = "Dwarf Description",
                 LivingStandard = "Rich",
                 UnusualCalling = "Warden",

@@ -41,7 +41,7 @@ namespace CharacterClasses
     public class Culture : Characteristics
     {
         public string Description { get; set; }
-        public string Name { get; set; }
+        public string CultureName { get; set; }
         public List<string> Specialties { get; set; }
 
     }
@@ -54,6 +54,7 @@ namespace CharacterClasses
         public int HeartFavoredAttribute { get; set; }
         public int WitsAttribute { get; set; }
         public int WitsFavoredAttribute { get; set; }
+        public Culture Culture { get; set; }
     }
 
     public class Background
@@ -72,6 +73,14 @@ namespace CharacterClasses
         public string Name { get; set; }
         public Dictionary<string, int> WeaponSetOne { get; set; }
         public Dictionary<string, int> WeaponSetTwo { get; set; }
+    }
+
+    public class CommonSkill
+    {
+        public string SkillName { get; set; }
+        public int SkillValue { get; set; }
+        public bool IsFavored { get; set; }
+        public string SkillGroupMember { get; set; }
     }
 
     public class Coffee
