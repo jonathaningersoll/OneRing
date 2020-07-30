@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace CharacterClasses
@@ -34,8 +35,7 @@ namespace CharacterClasses
 
         public List<string> DistinctiveFeatures { get; set; }
 
-        public Dictionary<string, int> WeaponSetOne { get; set; }
-        public Dictionary<string, int> WeaponSetTwo { get; set; }
+
     }
 
     public class Culture : Characteristics
@@ -43,6 +43,9 @@ namespace CharacterClasses
         public string Description { get; set; }
         public string CultureName { get; set; }
         public List<string> Specialties { get; set; }
+
+        public Dictionary<string, int> WeaponSetOne { get; set; }
+        public Dictionary<string, int> WeaponSetTwo { get; set; }
 
     }
 
@@ -55,6 +58,13 @@ namespace CharacterClasses
         public int WitsAttribute { get; set; }
         public int WitsFavoredAttribute { get; set; }
         public Culture Culture { get; set; }
+
+        public WeaponSkill WeaponSkillOne { get; set; }
+        public WeaponSkill WeaponSkillTwo { get; set; }
+        public WeaponSkill WeaponSkillThree { get; set; }
+        public WeaponSkill WeaponSkillFour { get; set; }
+        public WeaponSkill WeaponSkillFive { get; set; }
+        public WeaponSkill WeaponSkillSix { get; set; }
     }
 
     public class Background
@@ -81,6 +91,31 @@ namespace CharacterClasses
         public int SkillValue { get; set; }
         public bool IsFavored { get; set; }
         public string SkillGroupMember { get; set; }
+    }
+
+    public class WeaponSkill
+    {
+        public string CultureName { get; set; }
+        public string Profficiency { get; set; }
+        public int SkillValue { get; set; }
+        public bool IndividualSkill { get; set; }
+        public bool CulturalSkill { get; set; }
+    }
+
+    public class Weapon
+    {
+        public string WeaponName { get; set; }
+        public int Damage { get; set; }
+        public WeaponGroup WeaponGroup { get; set; }
+        public int Edge { get; set; }
+        public int Injury { get; set; }
+        public int Encumberance { get; set; }
+        public int Range { get; set; }
+    }
+
+    public class WeaponGroup
+    {
+        public string WeaponGroupName { get; set; }
     }
 
     public class Coffee

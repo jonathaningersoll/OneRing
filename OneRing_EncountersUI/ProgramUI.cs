@@ -19,6 +19,7 @@ namespace OneRing_EncountersUI
             SeedWeaponSets();
             SeedBackgrounds();
             SeedCultures();
+            SeedWeaponSkills();
             RunMenu();
         }
 
@@ -156,8 +157,20 @@ namespace OneRing_EncountersUI
                 newCulture.StealthCommonSkill = culters[selectedCulture].StealthCommonSkill;
                 newCulture.TravelCommonSkill = culters[selectedCulture].TravelCommonSkill;
 
-                Console.WriteLine(newCulture.LivingStandard);
+                Console.WriteLine("Please select the weapon skills for your character:");
+
+                CultureWeaponSet rawWepSet = _charRepo.GetWeaponSetByName(newCulture);
+                string wepSetOne = CultureWeaponSetLister(rawWepSet.WeaponSetOne);
+                string wepSetTwo = CultureWeaponSetLister(rawWepSet.WeaponSetTwo);
+
+                Console.WriteLine($"1. {wepSetOne}\n" +
+                    $"2. {wepSetTwo}");
                 Console.ReadLine();
+
+                SetWeapons();
+
+
+
             }
             return newCulture;
 
@@ -228,9 +241,9 @@ namespace OneRing_EncountersUI
                 Console.WriteLine("Please choose an appropriate option");
             }
 
-            //Configure culture
-            //Choose culture
-            //Configure weapon skills
+            //Configure culture         DONE
+            //Choose culture            DONE
+            //Configure weapon skills   DONE
             //ConfigureWeaponSkills();
             //Configure specialties
             //ConfigureSpecialties();
@@ -247,6 +260,10 @@ namespace OneRing_EncountersUI
             return newCulture;
         }
 
+        private void SetWeapons()
+        {
+
+        }
         private void ViewDetailMenu()
         {
             bool detailView = true;
@@ -639,6 +656,17 @@ namespace OneRing_EncountersUI
             _charRepo.CreateCulture(dwarfLonelyMountain);
         }
 
+        // Seed Weapon Stuff:
 
+        private void SeedWeaponSkills()
+        {
+            var WeaponSkill = new WeaponSkill()
+            {
+                CultureName = "Barding",
+                Profficiency = "Swords",
+                SkillValue = "2";
+                IndividualSkill = 
+            };
+        }
     }
 }
