@@ -19,6 +19,7 @@ namespace OneRing_EncountersUI
             SeedWeaponSets();
             SeedBackgrounds();
             SeedCultures();
+            SeedWeapons();
             SeedWeaponSkills();
             RunMenu();
         }
@@ -165,81 +166,31 @@ namespace OneRing_EncountersUI
 
                 Console.WriteLine($"1. {wepSetOne}\n" +
                     $"2. {wepSetTwo}");
-                Console.ReadLine();
+                int wepAns = int.Parse(Console.ReadLine());
 
+                switch (wepAns)
+                {
+                    case 1:
+                        {
+                            //string firstWep = rawWepSet.WeaponSetOne;
+                            break;
+                        }
+                    case 2:
+                        {
+                            break;
+                        }
+                    default:
+                        {
+                            Console.WriteLine("Please provide an appropriate value [1/2]:");
+                            break;
+                        }
+                }
                 SetWeapons();
 
 
 
             }
             return newCulture;
-
-            Console.Clear();
-            CultureMenu();
-            var cultureList = _charRepo.GetCultures();
-            int index = 1;
-            Console.WriteLine("Please enter a number to select a culture or option:");
-            Seperator();
-            foreach (Culture culture in cultureList)
-            {
-                Console.WriteLine($"{index}. {culture.CultureName}");
-                index++;
-            }
-            Seperator();
-            int final = index++;
-            Console.WriteLine($"{final}. View each culture's details");
-
-            string ansCultString = Console.ReadLine();
-            int ansCult = Int32.Parse(ansCultString);
-            ansCult--;
-            if (ansCult >= cultureList.Count)
-            {
-                bool cultDetailsMenu = true;
-                while (cultDetailsMenu)
-                {
-                    Console.Clear();
-                    var List = _charRepo.GetCultures();
-                    int ind = 1;
-                    Console.WriteLine("Please enter a number to select a culture or option:");
-                    Seperator();
-                    foreach (Culture culture in cultureList)
-                    {
-                        Console.WriteLine($"{index}. {culture.CultureName}");
-                        index++;
-                    }
-                    //DisplayCulture
-
-                    //switch case to turn cultDetailsMenu to false
-                }
-            }
-            else if (ansCult > cultureList.Count)
-            {
-                // Create new culture and assign values to it based on the index number
-                Culture tempCulture = cultureList.ElementAt(ansCult);
-                newCulture.CultureName = tempCulture.CultureName;
-                newCulture.LivingStandard = tempCulture.LivingStandard;
-                newCulture.CulturalBlessing = tempCulture.CulturalBlessing;
-
-                newCulture.AweCommonSkill = tempCulture.AweCommonSkill;
-                newCulture.AthleticsCommonSkill = tempCulture.AthleticsCommonSkill;
-                newCulture.AwarenessCommonSkill = tempCulture.AwarenessCommonSkill;
-                newCulture.ExploreCommonSkill = tempCulture.ExploreCommonSkill;
-                newCulture.SongCommonSkill = tempCulture.SongCommonSkill;
-                newCulture.CraftCommonSkill = tempCulture.CraftCommonSkill;
-                newCulture.InsightCommonSkill = tempCulture.InsightCommonSkill;
-                newCulture.TravelCommonSkill = tempCulture.TravelCommonSkill;
-                newCulture.HealingCommonSkill = tempCulture.HealingCommonSkill;
-                newCulture.CourtesyCommonSkill = tempCulture.BattleCommonSkill;
-                newCulture.BattleCommonSkill = tempCulture.BattleCommonSkill;
-                newCulture.PersuadeCommonSkill = tempCulture.PersuadeCommonSkill;
-                newCulture.SearchCommonSkill = tempCulture.SearchCommonSkill;
-                newCulture.RiddleCommonSkill = tempCulture.RiddleCommonSkill;
-                newCulture.LoreCommonSkill = tempCulture.LoreCommonSkill;
-            }
-            else
-            {
-                Console.WriteLine("Please choose an appropriate option");
-            }
 
             //Configure culture         DONE
             //Choose culture            DONE
@@ -257,8 +208,9 @@ namespace OneRing_EncountersUI
             //Add an additional Trait
             //Configure Shadow Weakness
 
-            return newCulture;
         }
+
+
 
         private void SetWeapons()
         {
@@ -658,14 +610,72 @@ namespace OneRing_EncountersUI
 
         // Seed Weapon Stuff:
 
+        private void SeedWeapons()
+        {
+            var dagger = new Weapon()
+            {
+                WeaponName = "Dagger",
+                Damage = 3,
+                Edge = 12,
+                Injury = 12,
+                Encumberance = 0,
+                WeaponGroup = WeaponGroup.Other
+            };
+            _charRepo.CreateWeapon(dagger);
+
+            var shortSword = new Weapon()
+            {
+                WeaponName = "Short Sword",
+                Damage = 5,
+                Edge = 10,
+                Injury = 14,
+                Encumberance = 1,
+                WeaponGroup = WeaponGroup.Sword
+            };
+            _charRepo.CreateWeapon(shortSword);
+
+            var sword = new Weapon()
+            {
+                WeaponName = "Sword",
+                Damage = 5,
+                Edge = 10,
+                Injury = 16,
+                Encumberance = 2,
+                WeaponGroup = WeaponGroup.Sword
+            };
+            _charRepo.CreateWeapon(sword);
+
+            var longSword = new Weapon()
+            {
+                WeaponName = "Long Sword",
+                Damage = 5,
+                Edge = 10,
+                Injury = 1,
+                Encumberance = 3,
+                WeaponGroup = WeaponGroup.Sword
+            };
+            _charRepo.CreateWeapon(dagger);
+
+            var spear = new Weapon()
+            {
+                WeaponName = "Spear",
+                Damage = 5,
+                Edge = 9,
+                Injury = 14,
+                Encumberance = 2,
+                WeaponGroup = WeaponGroup.Spear
+            };
+            _charRepo.CreateWeapon(dagger);
+        }
+
         private void SeedWeaponSkills()
         {
             var WeaponSkill = new WeaponSkill()
             {
                 CultureName = "Barding",
                 Profficiency = "Swords",
-                SkillValue = "2";
-                IndividualSkill = 
+                SkillValue = 2,
+                IndividualSkill = true
             };
         }
     }

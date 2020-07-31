@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace CharacterClasses
 {
+    public enum WeaponGroup { Sword=1, Axe, Bow, Spear, Other }
     public class Characteristics
     {
         public Background Background { get; set; }
@@ -92,7 +93,6 @@ namespace CharacterClasses
         public bool IsFavored { get; set; }
         public string SkillGroupMember { get; set; }
     }
-
     public class WeaponSkill
     {
         public string CultureName { get; set; }
@@ -110,30 +110,5 @@ namespace CharacterClasses
         public int Edge { get; set; }
         public int Injury { get; set; }
         public int Encumberance { get; set; }
-        public int Range { get; set; }
-    }
-
-    public class WeaponGroup
-    {
-        public string WeaponGroupName { get; set; }
-    }
-
-    public class Coffee
-    {
-        public string Roast { get; set; }
-        public bool Cafeinated { get; set; }
-        public bool HasCream { get; set; }
-        public decimal SizeInOz { get; set; }
-        public decimal TempInC { get; set; }
-
-
-        public Coffee(string roast, bool cafeinated, bool hasCream, decimal sizeInOz, decimal tempInC)
-        {
-            Roast = roast;
-            Cafeinated = cafeinated;
-            HasCream = hasCream;
-            SizeInOz = sizeInOz;
-            TempInC = tempInC;
-        }
     }
 }
